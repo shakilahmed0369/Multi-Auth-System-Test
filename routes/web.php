@@ -13,10 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**
+ * Front end routes
+ */
+Route::get('/', function () {
+    return view('frontend.home');
+});
+
+/**
+ * Backend routes
+ */
+Route::group( ['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+
+    //role route
+    Route::resource('/role', 'RoleController', ['as' => 'admin']);
+});
