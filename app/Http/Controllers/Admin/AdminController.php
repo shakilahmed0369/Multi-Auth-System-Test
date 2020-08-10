@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdminController extends Controller
 {
@@ -12,13 +13,19 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
+   
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        // if(!Gate::allows('isAdmin' or 'isSuperAdmin')){
+        //     return redirect('/');
+        // }
+
         return view('backend.dashboard');
     }
 

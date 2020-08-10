@@ -202,7 +202,13 @@
                           <div class="dropdown-menu">
                               <a class="dropdown-item" href="#">Message</a>
                               <a class="dropdown-item" href="#">Settings</a>
-                              <a class="dropdown-item" href="#">Log Out</a>
+
+                              <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                                Logout
+                            </a>    
+                            <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                           </div>
                       </div>
                   </div>

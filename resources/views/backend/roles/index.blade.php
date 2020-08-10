@@ -21,18 +21,22 @@
                               <th scope="row">1</th>
                               <td>{{ $role->role }}</td>
                               <td><a class="btn-sm btn-primary" href="{{ route('admin.role.edit', $role->id) }}"><i class="ti-pencil"></i></a>  <a onclick="event.preventDefault();
-                                document.getElementById('delete').submit();" class="btn-sm btn-danger" href=""><i class="ti-trash"></i></a></td>
+                                $('#delete').submit();" class="btn-sm btn-danger" href=""><i class="ti-trash"></i></a></td>
                               <form id="delete" action="{{ route('admin.role.destroy', $role->id) }}" method="POST">
                                   @csrf
-                                  @method('DELETE')
-                                  
+                                  @method('DELETE') 
                               </form>
                             </tr>
                         @endforeach
+                        
                       </tbody>
                   </table>
               </div>
           </div>
+          @if (!count($roles) > 0)
+            <p class="text-center text-danger"><b>NO Data Found!</b></p>            
+            @endif
+          
       </div>
   </div>
 </div>

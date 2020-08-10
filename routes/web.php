@@ -28,8 +28,11 @@ Route::get('/', function () {
  * Backend routes
  */
 Route::group( ['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/', 'AdminController@index')->name('admin.dashboard')->middleware(['can:isAdmin' or 'can:isSuperAdmin']);
 
     //role route
-    Route::resource('/role', 'RoleController', ['as' => 'admin']);
+    Route::resource('/role', 'RoleController', ['as' => 'admin'])->middleware('can:isSuperAdmin');
+    //Register Admin route
+    Route::resource('/register-admin', 'RegisterAdminController', ['as' => 'admin'])->middleware('can:isSuperAdmin' or 'can:isAdmin');
+    
 });
